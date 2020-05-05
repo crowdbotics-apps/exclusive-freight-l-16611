@@ -1,6 +1,6 @@
 from rest_framework import viewsets
 from rest_framework import authentication
-from .serializers import HomePageSerializer, CustomTextSerializer
+from .serializers import CustomTextSerializer, HomePageSerializer
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
 from rest_framework.authtoken.serializers import AuthTokenSerializer
 from rest_framework.permissions import IsAdminUser
@@ -14,7 +14,7 @@ from home.api.v1.serializers import (
     HomePageSerializer,
     UserSerializer,
 )
-from home.models import HomePage, CustomText
+from home.models import CustomText, HomePage
 
 
 class SignupViewSet(ModelViewSet):

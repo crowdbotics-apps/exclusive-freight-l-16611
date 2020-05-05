@@ -9,48 +9,108 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('task_profile', '0001_initial'),
+        ("task_profile", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='MapLocation',
+            name="MapLocation",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255)),
-                ('latitude', models.DecimalField(decimal_places=8, max_digits=12)),
-                ('longitude', models.DecimalField(decimal_places=8, max_digits=12)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                ("latitude", models.DecimalField(decimal_places=8, max_digits=12)),
+                ("longitude", models.DecimalField(decimal_places=8, max_digits=12)),
             ],
         ),
         migrations.CreateModel(
-            name='TaskLocation',
+            name="TaskLocation",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('address', models.TextField()),
-                ('zip', models.CharField(max_length=6)),
-                ('location', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tasklocation_location', to='location.MapLocation')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("address", models.TextField()),
+                ("zip", models.CharField(max_length=6)),
+                (
+                    "location",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="tasklocation_location",
+                        to="location.MapLocation",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='TaskerLocation',
+            name="TaskerLocation",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('latitude', models.DecimalField(decimal_places=8, max_digits=12)),
-                ('longitude', models.DecimalField(decimal_places=8, max_digits=12)),
-                ('last_updated', models.DateTimeField(auto_now=True)),
-                ('address', models.TextField(blank=True, null=True)),
-                ('zip', models.CharField(blank=True, max_length=6, null=True)),
-                ('tasker', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='taskerlocation_tasker', to='task_profile.TaskerProfile')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("latitude", models.DecimalField(decimal_places=8, max_digits=12)),
+                ("longitude", models.DecimalField(decimal_places=8, max_digits=12)),
+                ("last_updated", models.DateTimeField(auto_now=True)),
+                ("address", models.TextField(blank=True, null=True)),
+                ("zip", models.CharField(blank=True, max_length=6, null=True)),
+                (
+                    "tasker",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="taskerlocation_tasker",
+                        to="task_profile.TaskerProfile",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='CustomerLocation',
+            name="CustomerLocation",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('zip', models.CharField(max_length=6)),
-                ('country', models.CharField(max_length=50)),
-                ('customer', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='customerlocation_customer', to='task_profile.CustomerProfile')),
-                ('location', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='customerlocation_location', to='location.MapLocation')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("zip", models.CharField(max_length=6)),
+                ("country", models.CharField(max_length=50)),
+                (
+                    "customer",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="customerlocation_customer",
+                        to="task_profile.CustomerProfile",
+                    ),
+                ),
+                (
+                    "location",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="customerlocation_location",
+                        to="location.MapLocation",
+                    ),
+                ),
             ],
         ),
     ]

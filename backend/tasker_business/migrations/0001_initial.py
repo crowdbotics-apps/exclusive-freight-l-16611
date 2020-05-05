@@ -9,47 +9,122 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('task_profile', '0001_initial'),
-        ('task_category', '0001_initial'),
+        ("task_profile", "0001_initial"),
+        ("task_category", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Timeslot',
+            name="Timeslot",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date', models.DateField()),
-                ('start_time', models.TimeField()),
-                ('end_time', models.TimeField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("date", models.DateField()),
+                ("start_time", models.TimeField()),
+                ("end_time", models.TimeField()),
             ],
         ),
         migrations.CreateModel(
-            name='TaskerSkill',
+            name="TaskerSkill",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255)),
-                ('rate', models.FloatField()),
-                ('description', models.TextField()),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='taskerskill_category', to='task_category.Category')),
-                ('subcategory', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='taskerskill_subcategory', to='task_category.Subcategory')),
-                ('tasker', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='taskerskill_tasker', to='task_profile.TaskerProfile')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                ("rate", models.FloatField()),
+                ("description", models.TextField()),
+                (
+                    "category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="taskerskill_category",
+                        to="task_category.Category",
+                    ),
+                ),
+                (
+                    "subcategory",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="taskerskill_subcategory",
+                        to="task_category.Subcategory",
+                    ),
+                ),
+                (
+                    "tasker",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="taskerskill_tasker",
+                        to="task_profile.TaskerProfile",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='TaskerAvailability',
+            name="TaskerAvailability",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('tasker', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, related_name='taskeravailability_tasker', to='task_profile.TaskerProfile')),
-                ('timeslots', models.ManyToManyField(related_name='taskeravailability_timeslots', to='tasker_business.Timeslot')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "tasker",
+                    models.OneToOneField(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="taskeravailability_tasker",
+                        to="task_profile.TaskerProfile",
+                    ),
+                ),
+                (
+                    "timeslots",
+                    models.ManyToManyField(
+                        related_name="taskeravailability_timeslots",
+                        to="tasker_business.Timeslot",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='BusinessPhoto',
+            name="BusinessPhoto",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('photo', models.URLField()),
-                ('description', models.TextField()),
-                ('tasker', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='businessphoto_tasker', to='task_profile.TaskerProfile')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("photo", models.URLField()),
+                ("description", models.TextField()),
+                (
+                    "tasker",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="businessphoto_tasker",
+                        to="task_profile.TaskerProfile",
+                    ),
+                ),
             ],
         ),
     ]
